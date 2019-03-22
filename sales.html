@@ -8,6 +8,25 @@
     <body>
         <p>Salmon Cookie Sales</p>
         <h1>Seattle</h1>
+      <form id="location_form">
+        <fieldset>
+            <label for="location">Location:</label>
+            <input type="text" name="location" placeholder="enter your location" minlength="3" required >
+        </fieldset>
+        <fieldset>
+            <label for="mincust">Minimum Customers per Hour:</label>
+            <input type="text" name="mincust" placeholder="enter minimum customer per hour"  required >
+        </fieldset>
+        <fieldset>
+            <label for="maxcust">Maximum Customers per Hour:</label>
+            <input type="text" name="maxcust" placeholder="enter maximum customer per hour"  required >
+        </fieldset>
+        <fieldset>
+            <label for="AvgCookie">Average Cookies per Customer:</label>
+            <input type="text" name="AvgCookie" placeholder="enter Average Cookies per Customer" required >
+        </fieldset>
+        <button id="submit_btn" type="submit">Add Location</button>
+      </form>  
       <table>
           <thead id="tableHeader"> </thead>
           <tbody id="tableBody"></tbody>

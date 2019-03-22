@@ -1,7 +1,9 @@
+'use strict';
 var hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm','8pm'];
 var head = document.getElementById('tableHeader');
 var body = document.getElementById('tableBody');
 var footer = document.getElementById('tableFooter');
+var form = document.getElementById("location_form")
 var dataHead = [];
 var dataFooter = [];
 var locations = [];
@@ -14,15 +16,31 @@ function Location( min, max, avgcust, name) {
   this.avgCookiesPerCustomer = avgcust;
   this.name = name;
 }
-
+/*
 var pikeStreet = new Location (23, 65, 6.3, 'Pike Street');
 var seatacAirport = new Location (3, 24, 1.2, 'SecTac Airport');
 var seattleCenter = new Location(11, 38, 3.7, 'Seattle Center');
 var capitolHills = new Location(20, 38, 2.3, 'Capitol Hill');
-var alkiBeach = new Location (2, 16, 4.6, 'Alki');
+var alkiBeach = new Location (2, 16, 4.6, 'Alki');*/
+
+//collect form data
+function form_data(event){
+  event.preventDefault();
+  var location = event.target.location.value;
+  var mincust = event.target.mincust.value;
+  var maxcust = event.target.maxcust.value;
+  var avgcustomer = event.target.AvgCookie.value;
+  locations.push(new Location(mincust, maxcust,avgcustomer, location));
+  addtable();
+  createFooter();
+  form.reset();
+}
+
+form.addEventListener('submit', form_data);
+
 
 //adding objects to the locations array
-locations.push(pikeStreet,seatacAirport, seattleCenter, capitolHills, alkiBeach);
+//locations.push(pikeStreet,seatacAirport, seattleCenter, capitolHills, alkiBeach);
 
 // header data creation
   dataHead.push('<th>'+' '+'</th>');
@@ -38,9 +56,12 @@ locations.push(pikeStreet,seatacAirport, seattleCenter, capitolHills, alkiBeach)
 
 // 
 var totalCountFooter = [];
-
+console.log('outside my loop ', locations.length);
 //for loop for each of the locations
+//addtable();
+function addtable(){
 for (var k=0; k<locations.length; k++) {
+  console.log('in my loop');
     //Row data creation
     var bodyData = [];
     var newRowBody = document.createElement('tr');
@@ -63,12 +84,12 @@ for (var k=0; k<locations.length; k++) {
     bodyData.push('<td>'+ cookieCount + '</td>') 
     }
     
-    console.log('array totalCountFooter: ', totalCountFooter);
     bodyData.push('<td>'+ dailyLocationCount + '</td>') 
     var tempBodyData = bodyData.join(' ');
     newRowBody.innerHTML = tempBodyData;
     body.appendChild(newRowBody);
   }
+  /* moved to functon footer
   var totalCountAllLocations = 0;
   // footer data creation
   dataFooter.push('<td>'+'Totals '+'</td>');
@@ -81,11 +102,27 @@ for (var k=0; k<locations.length; k++) {
   var newRowFooter = document.createElement("tr");
   var tempData = dataFooter.join(' ');
   newRowFooter.innerHTML =  tempData;  
+  footer.appendChild(newRowFooter); */
+}
+ function createFooter(){
+   
+  var totalCountAllLocations = 0;
+  // footer data creation
+  dataFooter.push('<td>'+'Totals '+'</td>');
+  for (var k=0; k<totalCountFooter.length; k++) {
+    dataFooter.push('<td>' + totalCountFooter[k] + '</td>');
+    totalCountAllLocations=totalCountAllLocations+totalCountFooter[k];
+    console.log('createFooter:',totalCountAllLocations);
+  }
+  dataFooter.push('<td>'+totalCountAllLocations+'</td>');
+  // header append
+  var newRowFooter = document.createElement("tr");
+  var tempData = dataFooter.join(' ');
+  newRowFooter.innerHTML =  tempData;  
   footer.appendChild(newRowFooter);
- 
+ }
 
   function getRandomCustCount(min, max) {
-    console.log('min and max: ', min,max);
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
@@ -94,3 +131,5 @@ for (var k=0; k<locations.length; k++) {
   function calcCookies(AvgCust, customerCount) {
     return Math.ceil(AvgCust*customerCount);
   }
+
+ // createFooter();
