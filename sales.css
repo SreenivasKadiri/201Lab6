@@ -4,7 +4,7 @@ table {
     border: solid 1px rgb(124, 94, 94);
     margin-left: 15%;
     margin-right: 25%;
-    margin-top: 10%;
+    margin-top: 1%;
     margin-bottom: 25%;
 }
 td {
@@ -16,16 +16,43 @@ th {
     margin: 5px;
     border: solid 1px green;
     padding: 10px;
+    
 
 }
 p{
     color: seagreen;
     text-align: center;
     text-transform: uppercase;
+    font-size: 300%;
     
 }
 h1{
     color: seagreen;
     text-align: center;
     text-transform: uppercase;
+    font-size: 200%;
+}
+fieldset{
+    text-align: center;
+}
+
+loc_form{
+    float: left;
+    text-align: center;
+    margin-top: 5%;
+}
+h2{
+    color: seagreen;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 200%;
+       }
+
+#submit_btn{
+    margin-left: 50%;
+   margin: 0 auto;
+   /*display: inline-block;*/
+}
+body{
+    background-color: beige;
 }
